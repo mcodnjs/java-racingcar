@@ -31,11 +31,4 @@ public class RacingGame {
                 .get()
                 .getPosition();
 	}
-
-	public String getPositionToString() {
-		StringBuilder sb = new StringBuilder();
-		cars.forEach((car) -> sb.append(car.toString()).append("\n"));
-		sb.setLength(sb.length() - 1);
-		return sb.toString();
-	}
 }

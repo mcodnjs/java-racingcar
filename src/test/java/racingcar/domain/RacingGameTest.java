@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import racingcar.utils.NumberGenerator;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 class RacingGameTest {
 	class ZeroGenerator implements NumberGenerator {
 		@Override
@@ -35,15 +38,6 @@ class RacingGameTest {
 		RacingCars.add(new Car("tech"));
 	}
 
-	@Test
-	@DisplayName("Repository에 저장된 차들의 위치를 문자열로 반환해야 한다.")
-	void getPositionToStringTest() {
-		racingGame = new RacingGame(zeroGenerator);
-
-		String expected = "woowa : -\ntech : -";
-		assertThat(racingGame.getPositionToString()).isEqualTo(expected);
-	}
-
 	@Nested
 	class CarsMovementTest {
 		@Test
@@ -53,8 +47,11 @@ class RacingGameTest {
 			racingGame = new RacingGame(nineGenerator);
 			racingGame.moveCars();
 
-			String expected = "woowa : --\ntech : --\ncode : --";
-			assertThat(racingGame.getPositionToString()).isEqualTo(expected);
+			List<Car> cars = RacingCars.getCars();
+			List<Integer> carsPosition = cars.stream()
+					.map(Car::getPosition)
+					.collect(Collectors.toList());
+			assertThat(carsPosition).containsExactly(1, 1, 1);
 		}
 
 		@Test
@@ -64,8 +61,11 @@ class RacingGameTest {
 			racingGame = new RacingGame(zeroGenerator);
 			racingGame.moveCars();
 
-			String expected = "woowa : -\ntech : -\ncode : -";
-			assertThat(racingGame.getPositionToString()).isEqualTo(expected);
+			List<Car> cars = RacingCars.getCars();
+			List<Integer> carsPosition = cars.stream()
+					.map(Car::getPosition)
+					.collect(Collectors.toList());
+			assertThat(carsPosition).containsExactly(0, 0, 0);
 		}
 	}
 

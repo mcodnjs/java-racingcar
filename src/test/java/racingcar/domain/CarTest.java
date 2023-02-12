@@ -49,14 +49,4 @@ class CarTest {
 			Arguments.of(6, 1)
 		);
 	}
-
-	@Test
-	@DisplayName("차 객체의 위치 정보가 움직인만큼 문자열로 출력되어야 한다.")
-	void toStringTest() {
-		Car car = new Car("woowa");
-		car.move(4);
-		car.move(4);
-
-		assertThat(car.toString()).isEqualTo("woowa : ---");
-	}
 }
