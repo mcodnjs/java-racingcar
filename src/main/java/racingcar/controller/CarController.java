@@ -46,10 +46,10 @@ public class CarController {
 	private void startRound(int roundCount) {
 		RacingGame racingGame = new RacingGame(new RandomNumberGenerator());
 		OutputView.printRoundResultMsg();
-		OutputView.printRacingState(racingGame.getPositionToString());
+		OutputView.printRoundState(racingCars.getCars());
 		for (int i = 0; i < roundCount; i++) {
 			racingGame.moveCars();
-			OutputView.printRacingState(racingGame.getPositionToString());
+			OutputView.printRoundState(racingCars.getCars());
 		}
 		OutputView.printRacingResult(racingGame.getWinners());
 	}
