@@ -7,14 +7,21 @@ public class Car {
 	private int position;
 
 	public Car(String name) {
+		validateNameIsBlank(name);
 		validateNameLength(name);
 		this.name = name;
 		this.position = 0;
 	}
 
+	private void validateNameIsBlank(String name) {
+		if (name.isBlank()) {
+			throw new IllegalArgumentException("[ERROR]: 자동차 이름은 공백을 입력할 수 없습니다.");
+		}
+	}
+
 	private void validateNameLength(String name) {
 		if (name.length() > NAME_MAX_LENGTH) {
-			throw new IllegalArgumentException("[ERROR]: 자동차 이름은 5자 이하여야 합니다.");
+			throw new IllegalArgumentException("[ERROR]: 자동차 이름은 5자 이하여야 합니다." + "\n=> " + name);
 		}
 	}
 

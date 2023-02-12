@@ -28,15 +28,22 @@ public class InputView {
 	}
 
 	public static int readRoundCount() {
-		String roundCount = scanner.nextLine();
+		int roundCount = parseToInt(scanner.nextLine());
 		validateRoundCount(roundCount);
-		System.out.println();
-		return Integer.parseInt(roundCount);
+		return roundCount;
 	}
 
-	private static void validateRoundCount(String input) {
-		if (input.equals("0") || !input.matches("[0-9]+")) {
-			throw new IllegalArgumentException("[ERROR]: 자연수가 입력되어야 합니다.");
+	private static int parseToInt(String input) {
+		try {
+			return Integer.parseInt(input);
+		} catch (Exception e) {
+			throw new NumberFormatException("[ERROR]: 숫자가 아닌 값을 입력하였습니다. 숫자로 입력해주세요");
+		}
+	}
+
+	private static void validateRoundCount(int roundCount) {
+		if (roundCount <= 0) {
+			throw new IllegalArgumentException("[ERROR]: 1 이상의 값이 입력되어야 합니다.");
 		}
 	}
 }
