@@ -14,7 +14,7 @@ class RacingCarsTest {
 	}
 
 	@Test
-	@DisplayName("CarRepository에 중복되는 이름이 없을 경우 차가 정상적으로 추가되어야한다.")
+	@DisplayName("RacingCars에 중복되는 이름이 없을 경우 차가 정상적으로 추가되어야한다.")
 	void carAddTest() {
 		RacingCars.add(new Car("woowa"));
 		RacingCars.add(new Car("code"));
@@ -23,7 +23,7 @@ class RacingCarsTest {
 	}
 
 	@Test
-	@DisplayName("CarRepository에 중복되는 이름이 있을 경우 IllegalArgumentError를 발생시켜야 한다.")
+	@DisplayName("RacingCars에 중복되는 이름이 있을 경우 IllegalArgumentException을 발생시켜야 한다.")
 	void carAddFailTest() {
 		RacingCars.add(new Car("woowa"));
 
