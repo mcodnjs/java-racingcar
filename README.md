@@ -50,6 +50,6 @@
 
 ## 리팩토링 
 - [X] MVC 패턴 적용 (CarRepository, CarService -> RacingCars, RacingGame)
-- [ ] 우승자 구하는 로직 변경
+- [X] 우승자 구하는 로직 변경
 - [ ] 변수 및 메서드 네이밍
 - [ ] 자동차 위치를 요구사항대로 출력하는 메서드 

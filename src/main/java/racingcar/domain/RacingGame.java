@@ -1,12 +1,13 @@
 package racingcar.domain;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import racingcar.utils.NumberGenerator;
 
 public class RacingGame {
-	private NumberGenerator numberGenerator;
+	private final NumberGenerator numberGenerator;
 	List<Car> cars = RacingCars.getCars();
 
 	public RacingGame(NumberGenerator numberGenerator) {
@@ -14,27 +15,26 @@ public class RacingGame {
 	}
 
 	public void moveCars() {
-		cars.stream().forEach(car -> car.move(numberGenerator.getNumber()));
+		cars.forEach(car -> car.move(numberGenerator.getNumber()));
 	}
 
 	public List<String> getWinners() {
-		final int[] maxPos = {0};
-		cars.stream()
-			.forEach(car ->
-				maxPos[0] = car.getPosition() > maxPos[0]
-					? car.getPosition()
-					: maxPos[0]);
-
 		return cars.stream()
-			.filter(car -> car.getPosition() == maxPos[0])
-			.map(car -> car.getName())
+			.filter(car -> car.getPosition() == findMaxPosition())
+			.map(Car::getName)
 			.collect(Collectors.toList());
+	}
+
+	private int findMaxPosition() {
+		return cars.stream()
+                .max(Comparator.comparingInt(Car::getPosition))
+                .get()
+                .getPosition();
 	}
 
 	public String getPositionToString() {
 		StringBuilder sb = new StringBuilder();
-		cars.stream()
-			.forEach((car) -> sb.append(car.toString()).append("\n"));
+		cars.forEach((car) -> sb.append(car.toString()).append("\n"));
 		sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
