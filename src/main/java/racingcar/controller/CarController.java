@@ -14,12 +14,12 @@ public class CarController {
 	int roundCount;
 
 	public void run() {
-		while (!getCarNames()) ;
-		while (!getRoundCount()) ;
-		move(roundCount);
+		while (!inputCarNames()) ;
+		while (!inputRoundCount()) ;
+		startRound(roundCount);
 	}
 
-	private boolean getCarNames() {
+	private boolean inputCarNames() {
 		try {
 			OutputView.printCarNameRequestMsg();
 			List<String> carNames = InputView.readCarNames();
@@ -32,7 +32,7 @@ public class CarController {
 		}
 	}
 
-	private boolean getRoundCount() {
+	private boolean inputRoundCount() {
 		try {
 			OutputView.printRoundCountRequestMsg();
 			roundCount = InputView.readRoundCount();
@@ -43,9 +43,9 @@ public class CarController {
 		return false;
 	}
 
-	private void move(int roundCount) {
+	private void startRound(int roundCount) {
 		RacingGame racingGame = new RacingGame(new RandomNumberGenerator());
-		OutputView.printOutputMsg();
+		OutputView.printRoundResultMsg();
 		OutputView.printRacingState(racingGame.getPositionToString());
 		for (int i = 0; i < roundCount; i++) {
 			racingGame.moveCars();

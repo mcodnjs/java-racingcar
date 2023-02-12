@@ -6,13 +6,13 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-	private static final String DELIMITER = ",";
+	private static final String SPLIT_DELIMITER = ",";
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static List<String> readCarNames() {
 		String carNames = scanner.nextLine();
 		validateCarNames(carNames);
-		return formatter(carNames);
+		return splitCarNames(carNames);
 	}
 
 	private static void validateCarNames(String input) {
@@ -21,9 +21,9 @@ public class InputView {
 		}
 	}
 
-	private static List<String> formatter(String carNames) {
-		return Arrays.stream(carNames.split(DELIMITER))
-			.map(s -> s.trim())
+	private static List<String> splitCarNames(String carNames) {
+		return Arrays.stream(carNames.split(SPLIT_DELIMITER))
+			.map(String::trim)
 			.collect(Collectors.toList());
 	}
 

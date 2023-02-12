@@ -3,7 +3,7 @@ package racingcar.domain;
 public class Car {
 	private static final int NAME_MAX_LENGTH = 5;
 	private static final int MOVE_MIN_NUMBER = 4;
-	private String name;
+	private final String name;
 	private int position;
 
 	public Car(String name) {
@@ -19,12 +19,12 @@ public class Car {
 	}
 
 	public void move(int number) {
-		if (isMove(number)) {
+		if (canMove(number)) {
 			position ++;
 		}
 	}
 
-	private boolean isMove(int number) {
+	private boolean canMove(int number) {
 		return number >= MOVE_MIN_NUMBER;
 	}
 
