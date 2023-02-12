@@ -3,14 +3,14 @@ package racingcar.controller;
 import java.util.List;
 
 import racingcar.domain.Car;
-import racingcar.repository.CarRepository;
-import racingcar.service.CarService;
-import racingcar.service.RandomNumberGenerator;
+import racingcar.domain.RacingGame;
+import racingcar.domain.RacingCars;
+import racingcar.utils.RandomNumberGenerator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class CarController {
-	private CarRepository carRepository = new CarRepository();
+	private RacingCars racingCars = new RacingCars();
 	int roundCount;
 
 	public void run() {
@@ -23,10 +23,10 @@ public class CarController {
 		try {
 			OutputView.printCarNameRequestMsg();
 			List<String> carNames = InputView.readCarNames();
-			carNames.stream().forEach(carName -> carRepository.add(new Car(carName)));
+			carNames.stream().forEach(carName -> racingCars.add(new Car(carName)));
 			return true;
 		} catch (Exception e) {
-			carRepository.clear();
+			racingCars.clear();
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -44,13 +44,13 @@ public class CarController {
 	}
 
 	private void move(int roundCount) {
-		CarService carService = new CarService(new RandomNumberGenerator());
+		RacingGame racingGame = new RacingGame(new RandomNumberGenerator());
 		OutputView.printOutputMsg();
-		OutputView.printRacingState(carService.getPositionToString());
+		OutputView.printRacingState(racingGame.getPositionToString());
 		for (int i = 0; i < roundCount; i++) {
-			carService.moveCars();
-			OutputView.printRacingState(carService.getPositionToString());
+			racingGame.moveCars();
+			OutputView.printRacingState(racingGame.getPositionToString());
 		}
-		OutputView.printRacingResult(carService.getWinners());
+		OutputView.printRacingResult(racingGame.getWinners());
 	}
 }

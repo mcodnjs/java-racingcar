@@ -1,16 +1,15 @@
-package racingcar.service;
+package racingcar.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import racingcar.domain.Car;
-import racingcar.repository.CarRepository;
+import racingcar.utils.NumberGenerator;
 
-public class CarService {
+public class RacingGame {
 	private NumberGenerator numberGenerator;
-	List<Car> cars = CarRepository.getCars();
+	List<Car> cars = RacingCars.getCars();
 
-	public CarService(NumberGenerator numberGenerator) {
+	public RacingGame(NumberGenerator numberGenerator) {
 		this.numberGenerator = numberGenerator;
 	}
 
